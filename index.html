@@ -527,37 +527,13 @@ const DATA = {
       },
       "items": [
         {
-          "name": "Acqua minerale piccola",
-          "price": "€1,20 / €1,50",
-          "all": [],
-          "icon": "💧"
-        },
-        {
-          "name": "Acqua minerale grande",
-          "price": "€2,00 / €2,50",
-          "all": [],
-          "icon": "💧"
-        },
-        {
-          "name": "Macchiatone",
-          "price": "€1,50 / €2,00",
-          "all": [
-            "milk"
-          ]
-        },
-        {
           "name": "Caffè",
           "price": "€1,30 / €2,00",
           "all": []
         },
         {
-          "name": "Caffè Decaffeinato",
-          "price": "€1,50 / €2,50",
-          "all": []
-        },
-        {
-          "name": "Caffè Freddo",
-          "price": "€2,00 / €3,00",
+          "name": "Caffè americano",
+          "price": "€1,50 / €2,00",
           "all": []
         },
         {
@@ -577,13 +553,6 @@ const DATA = {
           "desc": "Tazza grande"
         },
         {
-          "name": "Caffè freddo con panna",
-          "price": "€3,00 / €3,50",
-          "all": [
-            "milk"
-          ]
-        },
-        {
           "name": "Caffè d'orzo/ginseng",
           "price": "€2,00 / €3,00",
           "all": [
@@ -600,16 +569,27 @@ const DATA = {
           "desc": "Grande"
         },
         {
-          "name": "Caffè americano",
-          "price": "€1,50 / €2,00",
+          "name": "Caffè Decaffeinato",
+          "price": "€1,50 / €2,50",
           "all": []
         },
         {
-          "name": "Cremino Caffè",
-          "price": "€2,50 / €3,00",
+          "name": "Caffè Freddo",
+          "price": "€2,00 / €3,00",
+          "all": []
+        },
+        {
+          "name": "Caffè freddo con panna",
+          "price": "€3,00 / €3,50",
           "all": [
             "milk"
           ]
+        },
+        {
+          "name": "Camomilla",
+          "price": "€2,00 / €2,50",
+          "all": [],
+          "icon": "🍵"
         },
         {
           "name": "Cappuccino",
@@ -619,6 +599,37 @@ const DATA = {
           ]
         },
         {
+          "name": "Cioccolata Calda",
+          "price": "€2,50 / €3,00",
+          "all": [
+            "milk"
+          ],
+          "icon": "choc"
+        },
+        {
+          "name": "Cioccolata Calda con panna",
+          "price": "€3,00 / €3,50",
+          "all": [
+            "milk"
+          ],
+          "icon": "choc"
+        },
+        {
+          "name": "Cremino Caffè",
+          "price": "€2,50 / €3,00",
+          "all": [
+            "milk"
+          ]
+        },
+        {
+          "name": "Latte di mandorla",
+          "price": "€2,50 / €3,50",
+          "all": [
+            "nuts"
+          ],
+          "icon": "🥛"
+        },
+        {
           "name": "Latte Macchiato",
           "price": "€2,00 / €2,50",
           "all": [
@@ -626,6 +637,66 @@ const DATA = {
           ],
           "icon": "latte"
         },
+        {
+          "name": "Macchiatone",
+          "price": "€1,50 / €2,00",
+          "all": [
+            "milk"
+          ]
+        },
+        {
+          "name": "Thè caldo",
+          "price": "€2,00 / €2,50",
+          "all": [],
+          "icon": "🍵"
+        },
+        {
+          "name": "Thè freddo",
+          "price": "€2,50 / €3,00",
+          "all": [],
+          "icon": "🥤"
+        },
+        {
+          "name": "Thè freddo con granita",
+          "price": "€3,00 / €3,50",
+          "all": [],
+          "icon": "🍧"
+        }
+      ]
+    },
+    {
+      "id": "pasticceria",
+      "icon": "🥐",
+      "cat": {
+        "it": "Pasticceria",
+        "en": "Pastries",
+        "fr": "Pâtisserie",
+        "es": "Pastelería",
+        "de": "Gebäck",
+        "ru": "Выпечка",
+        "zh": "糕点"
+      },
+      "note": {
+        "label": {
+          "it": "Prezzi",
+          "en": "Prices",
+          "fr": "Prix",
+          "es": "Precios",
+          "de": "Preise",
+          "ru": "Цены",
+          "zh": "价格"
+        },
+        "text": {
+          "it": "Primo prezzo al banco · secondo al tavolo.",
+          "en": "First price at the counter · second at the table.",
+          "fr": "Premier prix au comptoir · deuxième à table.",
+          "es": "Primer precio en barra · segundo en mesa.",
+          "de": "Erster Preis an der Theke · zweiter am Tisch.",
+          "ru": "Первая цена — у стойки · вторая — за столиком.",
+          "zh": "第一个价格为吧台价 · 第二个为堂食价。"
+        }
+      },
+      "items": [
         {
           "name": "Cornetto Piccolo",
           "price": "€1,20 / €1,50",
@@ -747,43 +818,97 @@ const DATA = {
             "egg"
           ],
           "icon": "🥐"
+        }
+      ]
+    },
+    {
+      "id": "rosticceria",
+      "icon": "🍕",
+      "cat": {
+        "it": "Rosticceria",
+        "en": "Savoury Snacks",
+        "fr": "Salés",
+        "es": "Salados",
+        "de": "Herzhaftes",
+        "ru": "Закуски",
+        "zh": "咸味点心"
+      },
+      "note": {
+        "label": {
+          "it": "Prezzi",
+          "en": "Prices",
+          "fr": "Prix",
+          "es": "Precios",
+          "de": "Preise",
+          "ru": "Цены",
+          "zh": "价格"
         },
+        "text": {
+          "it": "Primo prezzo al banco · secondo al tavolo.",
+          "en": "First price at the counter · second at the table.",
+          "fr": "Premier prix au comptoir · deuxième à table.",
+          "es": "Primer precio en barra · segundo en mesa.",
+          "de": "Erster Preis an der Theke · zweiter am Tisch.",
+          "ru": "Первая цена — у стойки · вторая — за столиком.",
+          "zh": "第一个价格为吧台价 · 第二个为堂食价。"
+        }
+      },
+      "items": [
         {
-          "name": "Mignon/Pizza",
+          "name": "Mignon Rosticceria",
           "price": "€2,20 / €2,50",
           "all": [
             "gluten",
             "milk"
           ],
           "icon": "🍕"
+        }
+      ]
+    },
+    {
+      "id": "bibite",
+      "icon": "🥤",
+      "cat": {
+        "it": "Bibite",
+        "en": "Drinks",
+        "fr": "Boissons",
+        "es": "Bebidas",
+        "de": "Getränke",
+        "ru": "Напитки",
+        "zh": "饮料"
+      },
+      "note": {
+        "label": {
+          "it": "Prezzi",
+          "en": "Prices",
+          "fr": "Prix",
+          "es": "Precios",
+          "de": "Preise",
+          "ru": "Цены",
+          "zh": "价格"
+        },
+        "text": {
+          "it": "Primo prezzo al banco · secondo al tavolo.",
+          "en": "First price at the counter · second at the table.",
+          "fr": "Premier prix au comptoir · deuxième à table.",
+          "es": "Primer precio en barra · segundo en mesa.",
+          "de": "Erster Preis an der Theke · zweiter am Tisch.",
+          "ru": "Первая цена — у стойки · вторая — за столиком.",
+          "zh": "第一个价格为吧台价 · 第二个为堂食价。"
+        }
+      },
+      "items": [
+        {
+          "name": "Acqua minerale piccola",
+          "price": "€1,20 / €1,50",
+          "all": [],
+          "icon": "💧"
         },
         {
-          "name": "Thè caldo",
+          "name": "Acqua minerale grande",
           "price": "€2,00 / €2,50",
           "all": [],
-          "icon": "🍵"
-        },
-        {
-          "name": "Camomilla",
-          "price": "€2,00 / €2,50",
-          "all": [],
-          "icon": "🍵"
-        },
-        {
-          "name": "Cioccolata Calda",
-          "price": "€2,50 / €3,00",
-          "all": [
-            "milk"
-          ],
-          "icon": "choc"
-        },
-        {
-          "name": "Cioccolata Calda con panna",
-          "price": "€3,00 / €3,50",
-          "all": [
-            "milk"
-          ],
-          "icon": "choc"
+          "icon": "💧"
         },
         {
           "name": "Succo di frutta",
@@ -810,44 +935,45 @@ const DATA = {
           "icon": "🥤"
         },
         {
-          "name": "Thè freddo",
-          "price": "€2,50 / €3,00",
-          "all": [],
-          "icon": "🥤"
-        },
-        {
-          "name": "Thè freddo con granita",
-          "price": "€3,00 / €3,50",
-          "all": [],
-          "icon": "🍧"
-        },
-        {
           "name": "Succo di pomodoro",
           "price": "€3,00 / €3,50",
           "all": [],
           "icon": "🍅"
         },
         {
-          "name": "Latte di mandorla",
-          "price": "€2,50 / €3,50",
-          "all": [
-            "nuts"
-          ],
-          "icon": "🥛"
+          "name": "Campari Soda",
+          "price": "€5,00 / €6,00",
+          "all": []
+        },
+        {
+          "name": "Bitter analcolico",
+          "price": "€3,00 / €4,00",
+          "all": []
+        },
+        {
+          "name": "Crodino",
+          "price": "€3,00 / €4,00",
+          "all": []
+        },
+        {
+          "name": "Red Bull",
+          "price": "€3,00 / €4,00",
+          "all": [],
+          "icon": "🥤"
         }
       ]
     },
     {
-      "id": "aperitivi",
-      "icon": "🍹",
+      "id": "vini",
+      "icon": "🍷",
       "cat": {
-        "it": "Aperitivi e Vini",
-        "en": "Aperitifs & Wine",
-        "fr": "Apéritifs et Vins",
-        "es": "Aperitivos y Vinos",
-        "de": "Aperitifs & Weine",
-        "ru": "Аперитивы и вино",
-        "zh": "餐前酒和葡萄酒"
+        "it": "Vini",
+        "en": "Wine",
+        "fr": "Vins",
+        "es": "Vinos",
+        "de": "Weine",
+        "ru": "Вино",
+        "zh": "葡萄酒"
       },
       "note": {
         "label": {
@@ -870,27 +996,6 @@ const DATA = {
         }
       },
       "items": [
-        {
-          "name": "Campari Soda",
-          "price": "€5,00 / €6,00",
-          "all": []
-        },
-        {
-          "name": "Bitter analcolico",
-          "price": "€3,00 / €4,00",
-          "all": []
-        },
-        {
-          "name": "Crodino",
-          "price": "€3,00 / €4,00",
-          "all": []
-        },
-        {
-          "name": "Red Bull",
-          "price": "€3,00 / €4,00",
-          "all": [],
-          "icon": "🥤"
-        },
         {
           "name": "Calice di vino",
           "price": "€5,00 / €6,00",
@@ -1241,7 +1346,44 @@ const DATA = {
           "de": "Erster Preis an der Theke · zweiter am Tisch. Verzehr pro Person erforderlich.",
           "ru": "Первая цена — у стойки · вторая — за столиком. Обязательный заказ на каждого человека.",
           "zh": "第一个价格为吧台价 · 第二个为堂食价。 每人需最低消费一份。"
-        }
+        },
+        "flavLabel": {
+          "it": "Gusti",
+          "en": "Flavours",
+          "fr": "Parfums",
+          "es": "Sabores",
+          "de": "Sorten",
+          "ru": "Вкусы",
+          "zh": "口味"
+        },
+        "flavours": [
+          "Nocciola",
+          "Cioccolato",
+          "Caffè",
+          "Zuppa Inglese",
+          "Frutti di Bosco",
+          "Fragola",
+          "Dubai",
+          "Chocolate",
+          "Pistacchio",
+          "Limone",
+          "Mango",
+          "Fiordilatte",
+          "Banana",
+          "Caramellata",
+          "Stracciatella",
+          "Kinder",
+          "Cereali",
+          "Kinder Bueno",
+          "Cioccolato Fondente",
+          "Pistacchiosa",
+          "Nocciole",
+          "Tella",
+          "Cocco",
+          "Nutella",
+          "Anguria",
+          "Arachidi Salate"
+        ]
       },
       "items": [
         {
@@ -1464,9 +1606,10 @@ function render(){
     html+=`<div class="sec-head" id="sec-${s.id}"><span class="ico">${icon(s.icon)}</span><h2>${t(s.cat)}</h2><span class="rule"></span></div>`;
     if(s.note){
       if(s.note.flavours){
-        html+=`<div class="flavbox"><div class="flavlabel">${t(s.note.label)}</div><div class="flavwrap">`
+        html+=`<div class="flavbox"><div class="flavlabel">${t(s.note.flavLabel||s.note.label)}</div><div class="flavwrap">`
           +s.note.flavours.map(f=>`<span class="flavtag">${f}</span>`).join("")+`</div></div>`;
-      } else {
+      }
+      if(s.note.text){
         html+=`<div class="sec-note"><b>${t(s.note.label)}</b><br>${t(s.note.text)}</div>`;
       }
     }
