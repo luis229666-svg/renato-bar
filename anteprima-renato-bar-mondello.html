@@ -1,0 +1,1709 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c2b40">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Renato Bar Mondello">
+<meta property="og:title" content="Renato Bar Mondello">
+<meta property="og:description" content="Menù al tavolo">
+<meta property="og:type" content="website">
+<title>Renato Bar Mondello</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F6ECDD; --cream-soft:rgba(246,236,221,.72); --cream-faint:rgba(246,236,221,.45);
+  --gold:#E8B86D; --espresso:#1c0f06;
+  --glass:linear-gradient(155deg, rgba(255,247,235,.16), rgba(255,247,235,.04));
+  --line:rgba(255,236,210,.22);
+  --pad:max(14px, env(safe-area-inset-left));
+  --header-h:210px;
+  --font-body:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+  --font-display:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  /* ---- colori tema (sovrascritti per ogni cliente) ---- */
+  --bg-1:#3a1d0c; --bg-2:#2a1408; --bg-3:#1c0d05;
+  --bg-glow:#7a4521; --bg-mid:#5a2f14;
+  --silk-1:rgba(214,150,90,.55); --silk-2:rgba(180,110,60,.5);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:var(--font-body);
+  color:var(--cream); min-height:100vh; line-height:1.42; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden; padding-bottom:calc(40px + env(safe-area-inset-bottom));
+}
+/* ----- ambient melted-chocolate background ----- */
+.bg{position:fixed; inset:0; z-index:-2;
+  background:
+   radial-gradient(120% 80% at 80% -10%, var(--bg-glow) 0%, transparent 55%),
+   radial-gradient(120% 90% at 0% 30%, var(--bg-mid) 0%, transparent 50%),
+   linear-gradient(160deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+}
+.silk{position:fixed; z-index:-1; inset:-10% -10%; pointer-events:none; opacity:.6;
+  background:
+   radial-gradient(40% 18% at 30% 35%, var(--silk-1), transparent 60%),
+   radial-gradient(46% 16% at 75% 65%, var(--silk-2), transparent 60%);
+  filter:blur(30px); animation:flow 26s ease-in-out infinite;}
+@keyframes flow{0%,100%{transform:translateY(0)}50%{transform:translateY(3vh)}}
+
+.glass{position:relative; background:var(--glass);
+  -webkit-backdrop-filter:blur(22px) saturate(155%); backdrop-filter:blur(22px) saturate(155%);
+  border:1px solid var(--line); border-radius:24px;
+  box-shadow:0 10px 30px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.32), inset 0 -10px 24px rgba(0,0,0,.10);}
+.glass::before{content:""; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background:linear-gradient(135deg, rgba(255,255,255,.30) 0%, rgba(255,255,255,0) 40%);
+  mix-blend-mode:screen; opacity:.65;}
+
+/* ----- sticky control panel ----- */
+.controls{position:sticky; top:0; z-index:30; padding:10px var(--pad) 8px;
+  margin:0 0 4px; border-radius:0 0 26px 26px;}
+.brandrow{display:flex; align-items:center; gap:10px; padding:2px 4px 8px;}
+.logo{line-height:.86;}
+.logo .w{font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--cream-soft); display:block;}
+.logo .c{font-size:23px; font-weight:800; letter-spacing:.5px; color:var(--cream);}
+.brandrow .tag{margin-left:auto; font-size:10.5px; letter-spacing:1px; text-transform:uppercase; color:var(--cream-faint);}
+
+/* language tabs */
+.langtabs{display:flex; gap:6px; overflow-x:auto; padding:2px 2px 8px; scrollbar-width:none;}
+.langtabs::-webkit-scrollbar{display:none;}
+.langtab{flex:0 0 auto; display:flex; align-items:center; gap:5px; padding:7px 11px; border-radius:13px;
+  font-size:13px; font-weight:600; cursor:pointer; user-select:none; white-space:nowrap;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16); color:var(--cream-soft);
+  transition:transform .12s ease, background .15s ease;}
+.langtab .fl{font-size:15px;}
+.langtab.active{background:var(--gold); border-color:var(--gold); color:var(--espresso);}
+.langtab:active{transform:scale(.95);}
+
+/* search */
+.searchwrap{display:flex; align-items:center; gap:9px; padding:9px 13px; border-radius:15px;
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); margin:0 2px 8px;}
+.searchwrap svg{flex:0 0 auto; opacity:.7;}
+.searchwrap input{flex:1; min-width:0; background:transparent; border:0; outline:0;
+  color:var(--cream); font:inherit; font-size:15px;}
+.searchwrap input::placeholder{color:var(--cream-faint);}
+.searchwrap .clear{cursor:pointer; color:var(--cream-faint); font-size:18px; padding:0 2px; display:none;}
+
+/* section chips (rettangolini) */
+.chips{display:flex; gap:7px; overflow-x:auto; padding:1px 2px 2px; scrollbar-width:none;}
+.chips::-webkit-scrollbar{display:none;}
+.chip{flex:0 0 auto; display:flex; align-items:center; gap:5px; padding:7px 12px; border-radius:12px;
+  font-size:12.5px; font-weight:600; cursor:pointer; white-space:nowrap; color:var(--cream-soft);
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); transition:background .15s, color .15s;}
+.chip .ce{font-size:14px;}
+.chip.active{background:rgba(232,184,109,.22); border-color:var(--gold); color:var(--cream);}
+
+main{padding:6px var(--pad) 0; max-width:580px; margin:0 auto;}
+
+.sec-head{display:flex; align-items:center; gap:10px; margin:24px 6px 10px; scroll-margin-top:var(--header-h);}
+.sec-head .ico{font-size:21px;}
+.sec-head h2{margin:0; font-family:var(--font-display); font-weight:600; font-size:23px; letter-spacing:2px; text-transform:uppercase;}
+.sec-head .rule{flex:1; height:1px; background:linear-gradient(90deg, var(--line), transparent);}
+
+.card{padding:13px 15px; margin:9px 0;}
+.item-top{display:flex; align-items:flex-start; gap:12px;}
+.item-ico{flex:0 0 auto; width:38px; height:38px; border-radius:12px; display:grid; place-items:center; font-size:20px;
+  background:linear-gradient(155deg, rgba(255,255,255,.18), rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.20); box-shadow:inset 0 1px 0 rgba(255,255,255,.4); transform:translateY(1px);}
+.item-body{flex:1; min-width:0;}
+.item-name{font-family:var(--font-display); font-weight:600; font-size:18.5px; letter-spacing:.2px; display:flex; justify-content:space-between; gap:10px; align-items:baseline;}
+.item-name .nm{min-width:0;}
+.item-name .price{font-family:var(--font-body); font-weight:800; font-size:13.5px; color:var(--gold); white-space:nowrap;}
+.item-desc{font-size:12.5px; color:var(--cream-soft); margin-top:2px;}
+.pills{display:flex; flex-wrap:wrap; gap:5px; margin-top:8px; align-items:center;}
+.pills .lbl{font-size:10px; letter-spacing:.4px; text-transform:uppercase; color:var(--cream-faint); margin-right:1px;}
+.pill{display:inline-flex; align-items:center; gap:4px; padding:3px 8px 3px 5px; border-radius:999px; font-size:11.5px;
+  background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.16);}
+.pill .num{display:grid; place-items:center; width:15px; height:15px; border-radius:50%; font-size:9px; font-weight:800; color:var(--espresso); background:var(--gold);}
+.pill.none{color:var(--cream-faint); background:transparent; border-style:dashed;}
+.sec-note{font-size:11.5px; color:var(--cream-soft); margin:2px 8px 4px; padding:9px 12px; border-radius:14px;
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);}
+.sec-note b{color:var(--gold); font-weight:700; letter-spacing:.4px; text-transform:uppercase; font-size:10.5px;}
+.flavbox{margin:2px 6px 8px; padding:13px 14px; border-radius:18px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14);}
+.flavlabel{font-size:11px; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:10px;}
+.flavwrap{display:flex; flex-wrap:wrap; gap:8px;}
+.flavtag{font-family:var(--font-display); font-size:18px; font-weight:600; line-height:1; padding:8px 14px; border-radius:13px; color:var(--cream);
+  background:linear-gradient(155deg, rgba(255,255,255,.18), rgba(255,255,255,.04)); border:1px solid rgba(255,236,210,.24);}
+
+.legend-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:6px;}
+.all-chip{display:flex; align-items:center; gap:8px; padding:9px 10px; border-radius:14px;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.13);}
+.all-chip .n{flex:0 0 auto; display:grid; place-items:center; width:21px; height:21px; border-radius:50%; font-size:10.5px; font-weight:800; color:var(--espresso); background:var(--gold);}
+.all-chip .e{font-size:16px;}
+.all-chip .nm{font-size:12px; line-height:1.15;}
+
+.nores{text-align:center; color:var(--cream-soft); padding:40px 10px; font-size:14px; display:none;}
+footer{text-align:center; color:var(--cream-faint); font-size:11px; margin:26px var(--pad) 0; letter-spacing:.3px; line-height:1.7;}
+
+.reveal{opacity:0; transform:translateY(8px); animation:rise .45s cubic-bezier(.2,.7,.3,1) forwards;}
+@keyframes rise{to{opacity:1; transform:none;}}
+@media (prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none;}.silk{animation:none;}}
+:focus-visible{outline:2px solid var(--gold); outline-offset:2px; border-radius:8px;}
+
+/* ---- rifiniture grafiche ---- */
+.item-ico svg,.sec-head svg{display:block}
+.item-ico{overflow:hidden; transition:transform .18s ease, box-shadow .18s ease;}
+.card{transition:transform .18s cubic-bezier(.2,.7,.3,1), box-shadow .18s ease;}
+@media (hover:hover){ .card:hover{transform:translateY(-2px); box-shadow:0 16px 34px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.34);} }
+.item-name .price{font-variant-numeric:tabular-nums; letter-spacing:.2px;}
+.sec-head .ico{filter:drop-shadow(0 1px 1px rgba(0,0,0,.22));}
+
+/* ---- tema del cliente (generato dal build) ---- */
+:root{
+  --cream:#EAF3FA; --cream-soft:rgba(234,243,250,0.72); --cream-faint:rgba(234,243,250,0.45);
+  --gold:#5FB3E6; --espresso:#06161f;
+  --line:rgba(234,243,250,0.22);
+  --bg-1:#103a55; --bg-2:#0c2b40; --bg-3:#061520;
+  --bg-glow:#2079a8; --bg-mid:#134e6f;
+  --silk-1:rgba(32,121,168,0.55); --silk-2:rgba(19,78,111,0.5);
+}
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="silk"></div>
+
+<div class="controls glass">
+  <div class="brandrow">
+    <div class="logo"><span class="w">Renato</span><span class="c">Bar Mondello</span></div>
+    <div class="tag" id="tag">Menù al tavolo</div>
+  </div>
+  <div class="langtabs" id="langtabs"></div>
+  <div class="searchwrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+    <input id="search" type="search" autocomplete="off" inputmode="search" placeholder="">
+    <span class="clear" id="clear">&times;</span>
+  </div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<main>
+  <div id="root"></div>
+  <div class="nores" id="nores"></div>
+  <footer id="footer"></footer>
+</main>
+
+<script>
+/* =========================================================================
+   LIBRERIA ICONE CONDIVISA  —  usata da TUTTI i clienti.
+   Nel menù di un cliente scrivi  "icon": "cake"  per usarne una,
+   oppure un’emoji  "icon": "🍵" . Aggiungi qui una nuova icona e sarà
+   subito disponibile per ogni cliente.
+   ========================================================================= */
+const ICONS = {
+  "milk": `<svg viewBox="0 0 32 32" width="23" height="23" aria-hidden="true"><path d="M9 13h14v12.4a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2z" fill="#F3EEE2" stroke="#b7a482" stroke-width="1"/><path d="M9 13l7-5 7 5z" fill="#FBF7EE" stroke="#b7a482" stroke-width="1" stroke-linejoin="round"/><path d="M16 8v5" stroke="#b7a482" stroke-width=".8" opacity=".55"/><rect x="9.7" y="16.6" width="12.6" height="6.2" fill="#8FC0E6"/><path d="M16 17.7c1.5 1.7 2.2 2.7 2.2 3.5a2.2 2.2 0 0 1-4.4 0c0-.8.7-1.8 2.2-3.5z" fill="#fff"/></svg>`,
+  "latte": `<svg viewBox="0 0 32 32" width="22" height="24" aria-hidden="true"><defs><clipPath id="lmg"><path d="M11 8h10l-1.2 18.2a2 2 0 0 1-2 1.8h-3.6a2 2 0 0 1-2-1.8z"/></clipPath></defs><g clip-path="url(#lmg)"><rect x="9" y="8" width="14" height="22" fill="#F4EFE6"/><rect x="9" y="11.4" width="14" height="4.4" fill="#6E4A2E"/><rect x="9" y="8" width="14" height="3.2" fill="#FBF8F2"/></g><path d="M11 8h10l-1.2 18.2a2 2 0 0 1-2 1.8h-3.6a2 2 0 0 1-2-1.8z" fill="none" stroke="#cbb48f" stroke-width="1.1" stroke-linejoin="round"/><ellipse cx="16" cy="8" rx="5" ry="1.3" fill="#FBF8F2" stroke="#cbb48f" stroke-width="1.1"/></svg>`,
+  "choc": `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><path d="M13 8c1-1.5 1-3 0-4.5M17 8c1-1.5 1-3 0-4.5" fill="none" stroke="#c9b9a3" stroke-width="1.3" stroke-linecap="round" opacity=".75"/><path d="M23 15a4.2 4.2 0 0 1 0 7.5" fill="none" stroke="#b89e78" stroke-width="1.8"/><path d="M8 13h15v6a6 6 0 0 1-6 6h-3a6 6 0 0 1-6-6z" fill="#F1E9DA" stroke="#b89e78" stroke-width="1.1" stroke-linejoin="round"/><ellipse cx="15.5" cy="13" rx="7.5" ry="2" fill="#5A3520"/><rect x="12.4" y="10.7" width="2.4" height="2.4" rx=".5" fill="#FBF6EC"/><rect x="15.4" y="11.1" width="2.2" height="2.2" rx=".5" fill="#FBF6EC"/></svg>`,
+  "cake": `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><path d="M25 11L25 14L19.55 14Z" fill="#E79AB2"/><path d="M19.55 14L25 14L25 17L14.09 17Z" fill="#F1D199"/><path d="M14.09 17L25 17L25 19.5L9.55 19.5Z" fill="#FBF1E2"/><path d="M9.55 19.5L25 19.5L25 24L5 22Z" fill="#F1D199"/><path d="M5 22L25 11L25 24Z" fill="none" stroke="#c79a52" stroke-width="1" stroke-linejoin="round"/><path d="M21 9.2L22.4 7.2" stroke="#5e7d33" stroke-width="1" stroke-linecap="round"/><circle cx="21" cy="11.2" r="2" fill="#C8455B"/><circle cx="20.4" cy="10.6" r=".6" fill="#e98aa0"/></svg>`,
+  "sfogliatella": `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><path d="M9 22C8 12 16 7 23 11C27 13 27 18 26 22Z" fill="#E3B26A" stroke="#b6863c" stroke-width="1" stroke-linejoin="round"/><path d="M10.5 21Q14 12 22 11.5" fill="none" stroke="#b6863c" stroke-width=".8" opacity=".6"/><path d="M10.5 21Q15 13.5 24 14" fill="none" stroke="#b6863c" stroke-width=".8" opacity=".6"/><path d="M10.5 21Q15.5 16 25.6 17.5" fill="none" stroke="#b6863c" stroke-width=".8" opacity=".6"/><path d="M10.5 21Q14 18.5 26 20.5" fill="none" stroke="#b6863c" stroke-width=".8" opacity=".6"/></svg>`,
+  "petitfour": `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><path d="M5 23h22" stroke="#d3b27f" stroke-width="1" stroke-linecap="round" opacity=".5"/><path d="M7 23Q7 15.5 11 15.5Q15 15.5 15 23Z" fill="#EFE0C0" stroke="#d3b27f" stroke-width="1"/><path d="M17 23Q17 16 21 16Q25 16 25 23Z" fill="#EFE0C0" stroke="#d3b27f" stroke-width="1"/><circle cx="11" cy="15.6" r="1.7" fill="#C8455B"/><ellipse cx="21" cy="16.2" rx="1.4" ry="2.2" fill="#E6CF98" stroke="#caa96a" stroke-width=".6"/></svg>`,
+  "braid": `<svg viewBox="0 0 32 32" width="22" height="24" aria-hidden="true"><rect x="11" y="5.5" width="10" height="21" rx="5" fill="#E2B466" stroke="#b78a3f" stroke-width="1"/><path d="M11 9.5L16 11.5L21 9.5M11 14L16 16L21 14M11 18.5L16 20.5L21 18.5M11 23L16 25L21 23" fill="none" stroke="#b78a3f" stroke-width="1" opacity=".7"/><path d="M12 7.5Q16 6.5 20 7.8Q17 9 13.5 8.2Q15.5 9.8 19 9" fill="none" stroke="#4A2C18" stroke-width="1.4" stroke-linecap="round"/><circle cx="13.5" cy="12" r=".7" fill="#4A2C18"/><circle cx="18" cy="16.5" r=".7" fill="#4A2C18"/><circle cx="14" cy="21" r=".7" fill="#4A2C18"/></svg>`,
+  "brioche": `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><circle cx="16" cy="19" r="8.5" fill="#E6B265" stroke="#b8893d" stroke-width="1"/><circle cx="16" cy="9.5" r="3.8" fill="#EABE73" stroke="#b8893d" stroke-width="1"/><ellipse cx="12.5" cy="15.5" rx="3" ry="1.7" fill="#ffffff" opacity=".35"/><path d="M9 19q7 4 14 0" fill="none" stroke="#c79a52" stroke-width=".8" opacity=".5"/></svg>`,
+  "arancina": `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><circle cx="16" cy="17" r="10" fill="#E0A23C" stroke="#a8761f" stroke-width="1"/><ellipse cx="12.5" cy="13" rx="4" ry="2.8" fill="#F0C779" opacity=".55"/><circle cx="11" cy="18" r="1" fill="#c2842a"/><circle cx="15" cy="21" r="1" fill="#c2842a"/><circle cx="20" cy="15" r="1" fill="#c2842a"/><circle cx="19" cy="20" r=".9" fill="#c2842a"/><circle cx="16" cy="14" r=".8" fill="#efc06a"/><circle cx="13" cy="16" r=".8" fill="#efc06a"/><circle cx="22" cy="19" r=".8" fill="#efc06a"/><circle cx="17.5" cy="18" r=".8" fill="#c2842a"/></svg>`,
+  "cannolo": `<svg viewBox="0 0 32 32" width="23" height="23" aria-hidden="true"><g transform="rotate(-35 16 16)"><rect x="5" y="12" width="22" height="9" rx="4.5" fill="#C9853A"/><rect x="5" y="12" width="22" height="9" rx="4.5" fill="none" stroke="#8f5620" stroke-width="1.2"/><line x1="10" y1="12.6" x2="10" y2="20.4" stroke="#8f5620" stroke-width="0.8" opacity=".55"/><line x1="16" y1="12.6" x2="16" y2="20.4" stroke="#8f5620" stroke-width="0.8" opacity=".55"/><line x1="22" y1="12.6" x2="22" y2="20.4" stroke="#8f5620" stroke-width="0.8" opacity=".55"/><ellipse cx="6.4" cy="16.5" rx="2.4" ry="4.4" fill="#FBF1DE"/><ellipse cx="25.6" cy="16.5" rx="2.4" ry="4.4" fill="#FBF1DE"/><circle cx="6.1" cy="15" r=".8" fill="#7a4f2b"/><circle cx="6.9" cy="18.2" r=".8" fill="#3f7a3a"/><circle cx="25.8" cy="15.4" r=".8" fill="#3f7a3a"/><circle cx="25.2" cy="18.2" r=".8" fill="#7a4f2b"/></g></svg>`,
+};
+
+
+const DATA = {
+  "langs": [
+    "it",
+    "en",
+    "fr",
+    "es",
+    "de",
+    "ru",
+    "zh"
+  ],
+  "allergens": {
+    "gluten": {
+      "n": 1,
+      "e": "🌾",
+      "nm": {
+        "it": "Glutine",
+        "en": "Gluten",
+        "fr": "Gluten",
+        "es": "Gluten",
+        "de": "Gluten",
+        "ru": "Глютен",
+        "zh": "麸质"
+      }
+    },
+    "crust": {
+      "n": 2,
+      "e": "🦐",
+      "nm": {
+        "it": "Crostacei",
+        "en": "Crustaceans",
+        "fr": "Crustacés",
+        "es": "Crustáceos",
+        "de": "Krebstiere",
+        "ru": "Ракообразные",
+        "zh": "甲壳类"
+      }
+    },
+    "egg": {
+      "n": 3,
+      "e": "🥚",
+      "nm": {
+        "it": "Uova",
+        "en": "Eggs",
+        "fr": "Œufs",
+        "es": "Huevos",
+        "de": "Eier",
+        "ru": "Яйца",
+        "zh": "蛋类"
+      }
+    },
+    "fish": {
+      "n": 4,
+      "e": "🐟",
+      "nm": {
+        "it": "Pesce",
+        "en": "Fish",
+        "fr": "Poisson",
+        "es": "Pescado",
+        "de": "Fisch",
+        "ru": "Рыба",
+        "zh": "鱼类"
+      }
+    },
+    "peanut": {
+      "n": 5,
+      "e": "🥜",
+      "nm": {
+        "it": "Arachidi",
+        "en": "Peanuts",
+        "fr": "Arachides",
+        "es": "Cacahuetes",
+        "de": "Erdnüsse",
+        "ru": "Арахис",
+        "zh": "花生"
+      }
+    },
+    "soy": {
+      "n": 6,
+      "e": "🫘",
+      "nm": {
+        "it": "Soia",
+        "en": "Soybeans",
+        "fr": "Soja",
+        "es": "Soja",
+        "de": "Soja",
+        "ru": "Соя",
+        "zh": "大豆"
+      }
+    },
+    "milk": {
+      "n": 7,
+      "e": "🥛",
+      "nm": {
+        "it": "Latte",
+        "en": "Milk",
+        "fr": "Lait",
+        "es": "Leche",
+        "de": "Milch",
+        "ru": "Молоко",
+        "zh": "牛奶"
+      }
+    },
+    "nuts": {
+      "n": 8,
+      "e": "🌰",
+      "nm": {
+        "it": "Frutta a guscio",
+        "en": "Tree nuts",
+        "fr": "Fruits à coque",
+        "es": "Frutos de cáscara",
+        "de": "Schalenfrüchte",
+        "ru": "Орехи",
+        "zh": "坚果"
+      }
+    },
+    "celery": {
+      "n": 9,
+      "e": "🥬",
+      "nm": {
+        "it": "Sedano",
+        "en": "Celery",
+        "fr": "Céleri",
+        "es": "Apio",
+        "de": "Sellerie",
+        "ru": "Сельдерей",
+        "zh": "芹菜"
+      }
+    },
+    "must": {
+      "n": 10,
+      "e": "🟡",
+      "nm": {
+        "it": "Senape",
+        "en": "Mustard",
+        "fr": "Moutarde",
+        "es": "Mostaza",
+        "de": "Senf",
+        "ru": "Горчица",
+        "zh": "芥末"
+      }
+    },
+    "sesame": {
+      "n": 11,
+      "e": "⚪",
+      "nm": {
+        "it": "Sesamo",
+        "en": "Sesame",
+        "fr": "Sésame",
+        "es": "Sésamo",
+        "de": "Sesam",
+        "ru": "Кунжут",
+        "zh": "芝麻"
+      }
+    },
+    "sulf": {
+      "n": 12,
+      "e": "🍷",
+      "nm": {
+        "it": "Solfiti",
+        "en": "Sulphites",
+        "fr": "Sulfites",
+        "es": "Sulfitos",
+        "de": "Sulfite",
+        "ru": "Сульфиты",
+        "zh": "亚硫酸盐"
+      }
+    },
+    "lupin": {
+      "n": 13,
+      "e": "🌱",
+      "nm": {
+        "it": "Lupini",
+        "en": "Lupin",
+        "fr": "Lupin",
+        "es": "Altramuces",
+        "de": "Lupinen",
+        "ru": "Люпин",
+        "zh": "羽扇豆"
+      }
+    },
+    "mollu": {
+      "n": 14,
+      "e": "🦪",
+      "nm": {
+        "it": "Molluschi",
+        "en": "Molluscs",
+        "fr": "Mollusques",
+        "es": "Moluscos",
+        "de": "Weichtiere",
+        "ru": "Моллюски",
+        "zh": "软体动物"
+      }
+    }
+  },
+  "ui": {
+    "tag": {
+      "it": "Menù al tavolo",
+      "en": "Table menu",
+      "fr": "Menu à table",
+      "es": "Menú en mesa",
+      "de": "Tischmenü",
+      "ru": "Меню за столом",
+      "zh": "桌边菜单"
+    },
+    "search": {
+      "it": "Cerca un prodotto…",
+      "en": "Search a product…",
+      "fr": "Rechercher un produit…",
+      "es": "Buscar un producto…",
+      "de": "Produkt suchen…",
+      "ru": "Поиск продукта…",
+      "zh": "搜索产品…"
+    },
+    "allergens": {
+      "it": "Allergeni",
+      "en": "Allergens",
+      "fr": "Allergènes",
+      "es": "Alérgenos",
+      "de": "Allergene",
+      "ru": "Аллергены",
+      "zh": "过敏原"
+    },
+    "contains": {
+      "it": "Contiene",
+      "en": "Contains",
+      "fr": "Contient",
+      "es": "Contiene",
+      "de": "Enthält",
+      "ru": "Содержит",
+      "zh": "含有"
+    },
+    "none": {
+      "it": "Senza allergeni principali",
+      "en": "No major allergens",
+      "fr": "Sans allergènes majeurs",
+      "es": "Sin alérgenos principales",
+      "de": "Keine Hauptallergene",
+      "ru": "Без основных аллергенов",
+      "zh": "无主要过敏原"
+    },
+    "noresults": {
+      "it": "Nessun prodotto trovato",
+      "en": "No products found",
+      "fr": "Aucun produit trouvé",
+      "es": "No se encontraron productos",
+      "de": "Keine Produkte gefunden",
+      "ru": "Ничего не найдено",
+      "zh": "未找到产品"
+    },
+    "frozen": {
+      "it": "* prodotto surgelato / congelato",
+      "en": "* frozen product",
+      "fr": "* produit surgelé",
+      "es": "* producto congelado",
+      "de": "* Tiefkühlprodukt",
+      "ru": "* замороженный продукт",
+      "zh": "* 冷冻产品"
+    },
+    "avail": {
+      "it": "I piatti possono variare in base alla disponibilità.",
+      "en": "Items may change with season and availability.",
+      "fr": "Les produits peuvent varier selon la saison et la disponibilité.",
+      "es": "Los productos pueden variar según temporada y disponibilidad.",
+      "de": "Das Angebot kann je nach Saison und Verfügbarkeit variieren.",
+      "ru": "Ассортимент может меняться в зависимости от сезона и наличия.",
+      "zh": "产品可能因季节和供应情况而变动。"
+    },
+    "note": {
+      "it": "Informazioni allergeni secondo Reg. UE 1169/2011, a titolo indicativo. In caso di allergie o intolleranze, informa sempre il personale.",
+      "en": "Allergen information per EU Reg. 1169/2011, indicative only. Always tell our staff about any allergy or intolerance.",
+      "fr": "Informations allergènes selon le règlement UE 1169/2011, à titre indicatif. En cas d'allergie ou d'intolérance, prévenez le personnel.",
+      "es": "Información de alérgenos según el Reg. UE 1169/2011, orientativa. En caso de alergia o intolerancia, informe al personal.",
+      "de": "Allergeninformationen gemäß EU-Verordnung 1169/2011, nur als Hinweis. Bei Allergien oder Unverträglichkeiten informieren Sie bitte das Personal.",
+      "ru": "Информация об аллергенах по Регламенту ЕС 1169/2011, носит справочный характер. При аллергии или непереносимости сообщите персоналу.",
+      "zh": "过敏原信息依据欧盟法规 1169/2011，仅供参考。如有过敏或不耐受，请务必告知工作人员。"
+    },
+    "flavours": {
+      "it": "Gusti gelato",
+      "en": "Ice cream flavours",
+      "fr": "Parfums de glace",
+      "es": "Sabores de helado",
+      "de": "Eissorten",
+      "ru": "Вкусы мороженого",
+      "zh": "冰淇淋口味"
+    }
+  },
+  "menu": [
+    {
+      "id": "caffetteria",
+      "icon": "☕",
+      "cat": {
+        "it": "Caffetteria",
+        "en": "Coffee Bar",
+        "fr": "Café",
+        "es": "Cafetería",
+        "de": "Kaffee",
+        "ru": "Кофе",
+        "zh": "咖啡"
+      },
+      "note": {
+        "label": {
+          "it": "Prezzi",
+          "en": "Prices",
+          "fr": "Prix",
+          "es": "Precios",
+          "de": "Preise",
+          "ru": "Цены",
+          "zh": "价格"
+        },
+        "text": {
+          "it": "Primo prezzo al banco · secondo al tavolo.",
+          "en": "First price at the counter · second at the table.",
+          "fr": "Premier prix au comptoir · deuxième à table.",
+          "es": "Primer precio en barra · segundo en mesa.",
+          "de": "Erster Preis an der Theke · zweiter am Tisch.",
+          "ru": "Первая цена — у стойки · вторая — за столиком.",
+          "zh": "第一个价格为吧台价 · 第二个为堂食价。"
+        }
+      },
+      "items": [
+        {
+          "name": "Caffè",
+          "price": "€1,30 / €2,00",
+          "all": []
+        },
+        {
+          "name": "Caffè americano",
+          "price": "€1,50 / €2,00",
+          "all": []
+        },
+        {
+          "name": "Caffè Caldo con panna",
+          "price": "€2,00 / €2,50",
+          "all": [
+            "milk"
+          ],
+          "desc": "Tazza piccola"
+        },
+        {
+          "name": "Caffè Caldo con panna",
+          "price": "€2,50 / €3,00",
+          "all": [
+            "milk"
+          ],
+          "desc": "Tazza grande"
+        },
+        {
+          "name": "Caffè d'orzo/ginseng",
+          "price": "€2,00 / €3,00",
+          "all": [
+            "gluten"
+          ],
+          "desc": "Piccolo"
+        },
+        {
+          "name": "Caffè d'orzo/ginseng",
+          "price": "€2,00 / €3,00",
+          "all": [
+            "gluten"
+          ],
+          "desc": "Grande"
+        },
+        {
+          "name": "Caffè Decaffeinato",
+          "price": "€1,50 / €2,50",
+          "all": []
+        },
+        {
+          "name": "Caffè Freddo",
+          "price": "€2,00 / €3,00",
+          "all": []
+        },
+        {
+          "name": "Caffè freddo con panna",
+          "price": "€3,00 / €3,50",
+          "all": [
+            "milk"
+          ]
+        },
+        {
+          "name": "Camomilla",
+          "price": "€2,00 / €2,50",
+          "all": [],
+          "icon": "🍵"
+        },
+        {
+          "name": "Cappuccino",
+          "price": "€2,00 / €2,80",
+          "all": [
+            "milk"
+          ]
+        },
+        {
+          "name": "Cioccolata Calda",
+          "price": "€2,50 / €3,00",
+          "all": [
+            "milk"
+          ],
+          "icon": "choc"
+        },
+        {
+          "name": "Cioccolata Calda con panna",
+          "price": "€3,00 / €3,50",
+          "all": [
+            "milk"
+          ],
+          "icon": "choc"
+        },
+        {
+          "name": "Cremino Caffè",
+          "price": "€2,50 / €3,00",
+          "all": [
+            "milk"
+          ]
+        },
+        {
+          "name": "Latte di mandorla",
+          "price": "€2,50 / €3,50",
+          "all": [
+            "nuts"
+          ],
+          "icon": "🥛"
+        },
+        {
+          "name": "Latte Macchiato",
+          "price": "€2,00 / €2,50",
+          "all": [
+            "milk"
+          ],
+          "icon": "latte"
+        },
+        {
+          "name": "Macchiatone",
+          "price": "€1,50 / €2,00",
+          "all": [
+            "milk"
+          ]
+        },
+        {
+          "name": "Thè caldo",
+          "price": "€2,00 / €2,50",
+          "all": [],
+          "icon": "🍵"
+        },
+        {
+          "name": "Thè freddo",
+          "price": "€2,50 / €3,00",
+          "all": [],
+          "icon": "🥤"
+        },
+        {
+          "name": "Thè freddo con granita",
+          "price": "€3,00 / €3,50",
+          "all": [],
+          "icon": "🍧"
+        }
+      ]
+    },
+    {
+      "id": "pasticceria",
+      "icon": "🥐",
+      "cat": {
+        "it": "Pasticceria",
+        "en": "Pastries",
+        "fr": "Pâtisserie",
+        "es": "Pastelería",
+        "de": "Gebäck",
+        "ru": "Выпечка",
+        "zh": "糕点"
+      },
+      "note": {
+        "label": {
+          "it": "Prezzi",
+          "en": "Prices",
+          "fr": "Prix",
+          "es": "Precios",
+          "de": "Preise",
+          "ru": "Цены",
+          "zh": "价格"
+        },
+        "text": {
+          "it": "Primo prezzo al banco · secondo al tavolo.",
+          "en": "First price at the counter · second at the table.",
+          "fr": "Premier prix au comptoir · deuxième à table.",
+          "es": "Primer precio en barra · segundo en mesa.",
+          "de": "Erster Preis an der Theke · zweiter am Tisch.",
+          "ru": "Первая цена — у стойки · вторая — за столиком.",
+          "zh": "第一个价格为吧台价 · 第二个为堂食价。"
+        }
+      },
+      "items": [
+        {
+          "name": "Cornetto Piccolo",
+          "price": "€1,20 / €1,50",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "🥐"
+        },
+        {
+          "name": "Cornetto Grande",
+          "price": "€1,50 / €1,80",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "🥐"
+        },
+        {
+          "name": "Cornetto Speciale",
+          "price": "€2,00 / €2,30",
+          "all": [
+            "gluten",
+            "milk",
+            "egg",
+            "nuts"
+          ],
+          "icon": "🥐",
+          "desc": "Mandorla, Nutella, Pistacchio"
+        },
+        {
+          "name": "Pain au Chocolat",
+          "price": "€2,00 / €2,30",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "🥐"
+        },
+        {
+          "name": "Ciambella Piccola",
+          "price": "€1,20 / €1,50",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "🍩"
+        },
+        {
+          "name": "Ciambella Grande",
+          "price": "€1,50 / €1,80",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "🍩"
+        },
+        {
+          "name": "Krapfen vuota",
+          "price": "€1,00 / €1,50",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "🍩"
+        },
+        {
+          "name": "Krapfen piena",
+          "price": "€1,50 / €2,00",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "🍩"
+        },
+        {
+          "name": "Treccina",
+          "price": "€1,00 / €1,50",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "braid"
+        },
+        {
+          "name": "Treccina con uvetta",
+          "price": "€1,50 / €1,80",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "braid"
+        },
+        {
+          "name": "Spoletta",
+          "price": "€1,50 / €1,80",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "🥐"
+        },
+        {
+          "name": "Danese",
+          "price": "€1,50 / €1,80",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "🥐"
+        }
+      ]
+    },
+    {
+      "id": "rosticceria",
+      "icon": "🍕",
+      "cat": {
+        "it": "Rosticceria",
+        "en": "Savoury Snacks",
+        "fr": "Salés",
+        "es": "Salados",
+        "de": "Herzhaftes",
+        "ru": "Закуски",
+        "zh": "咸味点心"
+      },
+      "note": {
+        "label": {
+          "it": "Prezzi",
+          "en": "Prices",
+          "fr": "Prix",
+          "es": "Precios",
+          "de": "Preise",
+          "ru": "Цены",
+          "zh": "价格"
+        },
+        "text": {
+          "it": "Primo prezzo al banco · secondo al tavolo.",
+          "en": "First price at the counter · second at the table.",
+          "fr": "Premier prix au comptoir · deuxième à table.",
+          "es": "Primer precio en barra · segundo en mesa.",
+          "de": "Erster Preis an der Theke · zweiter am Tisch.",
+          "ru": "Первая цена — у стойки · вторая — за столиком.",
+          "zh": "第一个价格为吧台价 · 第二个为堂食价。"
+        }
+      },
+      "items": [
+        {
+          "name": "Mignon Rosticceria",
+          "price": "€2,20 / €2,50",
+          "all": [
+            "gluten",
+            "milk"
+          ],
+          "icon": "🍕"
+        }
+      ]
+    },
+    {
+      "id": "bibite",
+      "icon": "🥤",
+      "cat": {
+        "it": "Bibite",
+        "en": "Drinks",
+        "fr": "Boissons",
+        "es": "Bebidas",
+        "de": "Getränke",
+        "ru": "Напитки",
+        "zh": "饮料"
+      },
+      "note": {
+        "label": {
+          "it": "Prezzi",
+          "en": "Prices",
+          "fr": "Prix",
+          "es": "Precios",
+          "de": "Preise",
+          "ru": "Цены",
+          "zh": "价格"
+        },
+        "text": {
+          "it": "Primo prezzo al banco · secondo al tavolo.",
+          "en": "First price at the counter · second at the table.",
+          "fr": "Premier prix au comptoir · deuxième à table.",
+          "es": "Primer precio en barra · segundo en mesa.",
+          "de": "Erster Preis an der Theke · zweiter am Tisch.",
+          "ru": "Первая цена — у стойки · вторая — за столиком.",
+          "zh": "第一个价格为吧台价 · 第二个为堂食价。"
+        }
+      },
+      "items": [
+        {
+          "name": "Acqua minerale piccola",
+          "price": "€1,20 / €1,50",
+          "all": [],
+          "icon": "💧"
+        },
+        {
+          "name": "Acqua minerale grande",
+          "price": "€2,00 / €2,50",
+          "all": [],
+          "icon": "💧"
+        },
+        {
+          "name": "Succo di frutta",
+          "price": "€2,50 / €3,00",
+          "all": [],
+          "icon": "🧃"
+        },
+        {
+          "name": "Bibite in lattina",
+          "price": "€2,50 / €3,00",
+          "all": [],
+          "icon": "🥤"
+        },
+        {
+          "name": "Spremuta arancia",
+          "price": "€3,00 / €3,50",
+          "all": [],
+          "icon": "🍊"
+        },
+        {
+          "name": "Acqua Tonica",
+          "price": "€2,50 / €3,00",
+          "all": [],
+          "icon": "🥤"
+        },
+        {
+          "name": "Succo di pomodoro",
+          "price": "€3,00 / €3,50",
+          "all": [],
+          "icon": "🍅"
+        },
+        {
+          "name": "Campari Soda",
+          "price": "€5,00 / €6,00",
+          "all": []
+        },
+        {
+          "name": "Bitter analcolico",
+          "price": "€3,00 / €4,00",
+          "all": []
+        },
+        {
+          "name": "Crodino",
+          "price": "€3,00 / €4,00",
+          "all": []
+        },
+        {
+          "name": "Red Bull",
+          "price": "€3,00 / €4,00",
+          "all": [],
+          "icon": "🥤"
+        }
+      ]
+    },
+    {
+      "id": "vini",
+      "icon": "🍷",
+      "cat": {
+        "it": "Vini",
+        "en": "Wine",
+        "fr": "Vins",
+        "es": "Vinos",
+        "de": "Weine",
+        "ru": "Вино",
+        "zh": "葡萄酒"
+      },
+      "note": {
+        "label": {
+          "it": "Prezzi",
+          "en": "Prices",
+          "fr": "Prix",
+          "es": "Precios",
+          "de": "Preise",
+          "ru": "Цены",
+          "zh": "价格"
+        },
+        "text": {
+          "it": "Primo prezzo al banco · secondo al tavolo. Non si effettuano mezze consumazioni.",
+          "en": "First price at the counter · second at the table. No half portions.",
+          "fr": "Premier prix au comptoir · deuxième à table. Pas de demi-consommations.",
+          "es": "Primer precio en barra · segundo en mesa. No se sirven medias consumiciones.",
+          "de": "Erster Preis an der Theke · zweiter am Tisch. Keine halben Portionen.",
+          "ru": "Первая цена — у стойки · вторая — за столиком. Половинные порции не подаются.",
+          "zh": "第一个价格为吧台价 · 第二个为堂食价。 不提供半份。"
+        }
+      },
+      "items": [
+        {
+          "name": "Calice di vino",
+          "price": "€5,00 / €6,00",
+          "all": [
+            "sulf"
+          ],
+          "icon": "🍷"
+        },
+        {
+          "name": "Calice prosecco",
+          "price": "€5,00 / €6,00",
+          "all": [
+            "sulf"
+          ],
+          "icon": "🥂"
+        }
+      ]
+    },
+    {
+      "id": "cocktail",
+      "icon": "🍸",
+      "cat": {
+        "it": "Cocktail",
+        "en": "Cocktails",
+        "fr": "Cocktails",
+        "es": "Cócteles",
+        "de": "Cocktails",
+        "ru": "Коктейли",
+        "zh": "鸡尾酒"
+      },
+      "note": {
+        "label": {
+          "it": "Prezzi",
+          "en": "Prices",
+          "fr": "Prix",
+          "es": "Precios",
+          "de": "Preise",
+          "ru": "Цены",
+          "zh": "价格"
+        },
+        "text": {
+          "it": "Primo prezzo al banco · secondo al tavolo. Non si effettuano mezze consumazioni.",
+          "en": "First price at the counter · second at the table. No half portions.",
+          "fr": "Premier prix au comptoir · deuxième à table. Pas de demi-consommations.",
+          "es": "Primer precio en barra · segundo en mesa. No se sirven medias consumiciones.",
+          "de": "Erster Preis an der Theke · zweiter am Tisch. Keine halben Portionen.",
+          "ru": "Первая цена — у стойки · вторая — за столиком. Половинные порции не подаются.",
+          "zh": "第一个价格为吧台价 · 第二个为堂食价。 不提供半份。"
+        }
+      },
+      "items": [
+        {
+          "name": "Negroni",
+          "price": "€7,00 / €8,00",
+          "all": [
+            "sulf"
+          ]
+        },
+        {
+          "name": "Aperol Spritz",
+          "price": "€7,00 / €8,00",
+          "all": [
+            "sulf"
+          ],
+          "icon": "🥂"
+        },
+        {
+          "name": "Limoncello Spritz",
+          "price": "€8,00 / €9,00",
+          "all": [
+            "sulf"
+          ],
+          "icon": "🥂"
+        },
+        {
+          "name": "Hugo Spritz",
+          "price": "€7,00 / €8,00",
+          "all": [
+            "sulf"
+          ],
+          "icon": "🥂"
+        },
+        {
+          "name": "Piña Colada",
+          "price": "€7,00 / €8,00",
+          "all": [
+            "milk"
+          ],
+          "icon": "🍹"
+        },
+        {
+          "name": "Martini",
+          "price": "€5,00 / €6,00",
+          "all": [
+            "sulf"
+          ]
+        },
+        {
+          "name": "Gin",
+          "price": "€5,00 / €6,00",
+          "all": []
+        },
+        {
+          "name": "Vodka",
+          "price": "€5,00 / €6,00",
+          "all": []
+        },
+        {
+          "name": "Gin Tonic Lemon",
+          "price": "€7,00 / €8,00",
+          "all": []
+        },
+        {
+          "name": "Gin Fizz",
+          "price": "€7,00 / €8,00",
+          "all": []
+        },
+        {
+          "name": "Gin Tonic Mare",
+          "price": "€12,00 / €14,00",
+          "all": []
+        },
+        {
+          "name": "Gin Bombay",
+          "price": "€8,00 / €9,00",
+          "all": []
+        },
+        {
+          "name": "Gin Hendrick's",
+          "price": "€12,00 / €15,00",
+          "all": []
+        },
+        {
+          "name": "Gin Tanqueray",
+          "price": "€8,00 / €9,00",
+          "all": []
+        },
+        {
+          "name": "Gin Dolce Vita Lemon/Tonic",
+          "price": "€8,00 / €9,00",
+          "all": []
+        },
+        {
+          "name": "Vodka Tonic/Lemon",
+          "price": "€7,00 / €8,00",
+          "all": []
+        },
+        {
+          "name": "Vodka Belvedere Tonic/Lemon",
+          "price": "€12,00 / €14,00",
+          "all": []
+        },
+        {
+          "name": "Vodka Belvedere",
+          "price": "€7,00 / €9,00",
+          "all": []
+        },
+        {
+          "name": "Cocktail Martini",
+          "price": "€7,00 / €8,00",
+          "all": [
+            "sulf"
+          ]
+        },
+        {
+          "name": "Mojito",
+          "price": "€7,00 / €8,00",
+          "all": [],
+          "icon": "🍹"
+        },
+        {
+          "name": "Cuba Libre",
+          "price": "€7,00 / €8,00",
+          "all": [],
+          "icon": "🍹"
+        },
+        {
+          "name": "Margarita",
+          "price": "€7,00 / €8,00",
+          "all": [],
+          "icon": "🍹"
+        },
+        {
+          "name": "Caipirinha",
+          "price": "€7,00 / €8,00",
+          "all": [],
+          "icon": "🍹"
+        },
+        {
+          "name": "Caipiroska",
+          "price": "€7,00 / €8,00",
+          "all": [],
+          "icon": "🍹"
+        },
+        {
+          "name": "Shot",
+          "price": "€2,50 / €3,00",
+          "all": [],
+          "icon": "🥃"
+        },
+        {
+          "name": "Amari",
+          "price": "€5,00 / €6,00",
+          "all": [],
+          "icon": "🥃"
+        }
+      ]
+    },
+    {
+      "id": "birre",
+      "icon": "🍺",
+      "cat": {
+        "it": "Birre",
+        "en": "Beers",
+        "fr": "Bières",
+        "es": "Cervezas",
+        "de": "Biere",
+        "ru": "Пиво",
+        "zh": "啤酒"
+      },
+      "note": {
+        "label": {
+          "it": "Prezzi",
+          "en": "Prices",
+          "fr": "Prix",
+          "es": "Precios",
+          "de": "Preise",
+          "ru": "Цены",
+          "zh": "价格"
+        },
+        "text": {
+          "it": "Primo prezzo al banco · secondo al tavolo. Non si effettuano mezze consumazioni.",
+          "en": "First price at the counter · second at the table. No half portions.",
+          "fr": "Premier prix au comptoir · deuxième à table. Pas de demi-consommations.",
+          "es": "Primer precio en barra · segundo en mesa. No se sirven medias consumiciones.",
+          "de": "Erster Preis an der Theke · zweiter am Tisch. Keine halben Portionen.",
+          "ru": "Первая цена — у стойки · вторая — за столиком. Половинные порции не подаются.",
+          "zh": "第一个价格为吧台价 · 第二个为堂食价。 不提供半份。"
+        }
+      },
+      "items": [
+        {
+          "name": "Messina Cristalli di Sale",
+          "price": "€3,50 / €4,50",
+          "all": [
+            "gluten"
+          ]
+        },
+        {
+          "name": "Tennent's",
+          "price": "€3,50 / €4,50",
+          "all": [
+            "gluten"
+          ]
+        },
+        {
+          "name": "Ceres",
+          "price": "€3,50 / €4,50",
+          "all": [
+            "gluten"
+          ]
+        },
+        {
+          "name": "Moretti",
+          "price": "€2,50 / €3,50",
+          "all": [
+            "gluten"
+          ]
+        },
+        {
+          "name": "Corona",
+          "price": "€3,50 / €4,50",
+          "all": [
+            "gluten"
+          ]
+        },
+        {
+          "name": "Beck's",
+          "price": "€2,50 / €3,50",
+          "all": [
+            "gluten"
+          ]
+        },
+        {
+          "name": "Heineken",
+          "price": "€2,50 / €3,50",
+          "all": [
+            "gluten"
+          ]
+        },
+        {
+          "name": "Peroni Capri",
+          "price": "€2,50 / €3,50",
+          "all": [
+            "gluten"
+          ]
+        },
+        {
+          "name": "Ichnusa non filtrata",
+          "price": "€3,50 / €4,50",
+          "all": [
+            "gluten"
+          ]
+        },
+        {
+          "name": "Raffo Grezza",
+          "price": "€3,50 / €4,50",
+          "all": [
+            "gluten"
+          ]
+        },
+        {
+          "name": "Raffo Originale",
+          "price": "€2,50 / €3,50",
+          "all": [
+            "gluten"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gelateria",
+      "icon": "🍦",
+      "cat": {
+        "it": "Gelateria",
+        "en": "Ice Cream",
+        "fr": "Glaces",
+        "es": "Heladería",
+        "de": "Eisdiele",
+        "ru": "Мороженое",
+        "zh": "冰淇淋"
+      },
+      "note": {
+        "label": {
+          "it": "Prezzi",
+          "en": "Prices",
+          "fr": "Prix",
+          "es": "Precios",
+          "de": "Preise",
+          "ru": "Цены",
+          "zh": "价格"
+        },
+        "text": {
+          "it": "Primo prezzo al banco · secondo al tavolo. Consumazione a persona obbligatoria.",
+          "en": "First price at the counter · second at the table. One consumption per person required.",
+          "fr": "Premier prix au comptoir · deuxième à table. Une consommation par personne obligatoire.",
+          "es": "Primer precio en barra · segundo en mesa. Consumición por persona obligatoria.",
+          "de": "Erster Preis an der Theke · zweiter am Tisch. Verzehr pro Person erforderlich.",
+          "ru": "Первая цена — у стойки · вторая — за столиком. Обязательный заказ на каждого человека.",
+          "zh": "第一个价格为吧台价 · 第二个为堂食价。 每人需最低消费一份。"
+        },
+        "flavLabel": {
+          "it": "Gusti",
+          "en": "Flavours",
+          "fr": "Parfums",
+          "es": "Sabores",
+          "de": "Sorten",
+          "ru": "Вкусы",
+          "zh": "口味"
+        },
+        "flavours": [
+          "Nocciola",
+          "Cioccolato",
+          "Caffè",
+          "Zuppa Inglese",
+          "Frutti di Bosco",
+          "Fragola",
+          "Dubai",
+          "Chocolate",
+          "Pistacchio",
+          "Limone",
+          "Mango",
+          "Fiordilatte",
+          "Banana",
+          "Caramellata",
+          "Stracciatella",
+          "Kinder",
+          "Cereali",
+          "Kinder Bueno",
+          "Cioccolato Fondente",
+          "Pistacchiosa",
+          "Nocciole",
+          "Tella",
+          "Cocco",
+          "Nutella",
+          "Anguria",
+          "Arachidi Salate"
+        ]
+      },
+      "items": [
+        {
+          "name": "Granite",
+          "price": "€3,00 / €4,00",
+          "all": [],
+          "icon": "🍧"
+        },
+        {
+          "name": "Granite con panna",
+          "price": "€3,50 / €4,50",
+          "all": [
+            "milk"
+          ],
+          "icon": "🍧"
+        },
+        {
+          "name": "Cono gelato",
+          "price": "€3,00 / €3,50",
+          "all": [
+            "milk",
+            "gluten"
+          ],
+          "icon": "🍦",
+          "desc": "Con panna o senza"
+        },
+        {
+          "name": "Coppetta gelato small",
+          "price": "€2,50 / €3,00",
+          "all": [
+            "milk"
+          ],
+          "icon": "🍨",
+          "desc": "Con panna o senza"
+        },
+        {
+          "name": "Coppetta gelato medium",
+          "price": "€3,50 / €4,00",
+          "all": [
+            "milk"
+          ],
+          "icon": "🍨",
+          "desc": "Con panna o senza"
+        },
+        {
+          "name": "Coppetta gelato large",
+          "price": "€4,50 / €5,00",
+          "all": [
+            "milk"
+          ],
+          "icon": "🍨",
+          "desc": "Con panna o senza"
+        },
+        {
+          "name": "Brioches gelato",
+          "price": "€4,00 / €4,50",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "brioche",
+          "desc": "Con panna o senza"
+        },
+        {
+          "name": "Spongato piccolo",
+          "price": "€6,00 / €7,00",
+          "all": [
+            "milk",
+            "egg"
+          ],
+          "icon": "🍦"
+        },
+        {
+          "name": "Spongato grande",
+          "price": "€7,00 / €8,00",
+          "all": [
+            "milk",
+            "egg"
+          ],
+          "icon": "🍦"
+        },
+        {
+          "name": "Gelato al Kg.",
+          "price": "€19,00",
+          "all": [
+            "milk"
+          ],
+          "icon": "🍦"
+        },
+        {
+          "name": "Waffel Nutella",
+          "price": "€5,00 / €6,00",
+          "all": [
+            "gluten",
+            "milk",
+            "egg",
+            "nuts",
+            "soy"
+          ],
+          "icon": "🧇"
+        },
+        {
+          "name": "Waffel Gelato",
+          "price": "€6,00 / €7,00",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "🧇"
+        },
+        {
+          "name": "Crepes Nutella",
+          "price": "€5,00 / €6,00",
+          "all": [
+            "gluten",
+            "milk",
+            "egg",
+            "nuts",
+            "soy"
+          ],
+          "icon": "🥞"
+        },
+        {
+          "name": "Crepes Gelato",
+          "price": "€7,00 / €9,00",
+          "all": [
+            "gluten",
+            "milk",
+            "egg"
+          ],
+          "icon": "🥞"
+        },
+        {
+          "name": "Frappè",
+          "price": "€3,50 / €4,00",
+          "all": [
+            "milk"
+          ],
+          "icon": "🥤"
+        },
+        {
+          "name": "Frappè con panna",
+          "price": "€4,00 / €4,50",
+          "all": [
+            "milk"
+          ],
+          "icon": "🥤"
+        },
+        {
+          "name": "Coppa Primavera",
+          "price": "€8,00 / €9,00",
+          "all": [
+            "milk"
+          ],
+          "icon": "🍨",
+          "desc": "Gelato fragola, panna montata, fragoline di bosco"
+        },
+        {
+          "name": "Coppa Caldo Freddo",
+          "price": "€8,00 / €9,00",
+          "all": [
+            "milk",
+            "nuts"
+          ],
+          "icon": "🍨",
+          "desc": "Gelato fiordilatte, nocciola, cioccolato, colata di cioccolata calda"
+        },
+        {
+          "name": "Banana Split",
+          "price": "€8,00 / €9,00",
+          "all": [
+            "milk",
+            "nuts"
+          ],
+          "icon": "🍌",
+          "desc": "Banana, gelato fiordilatte, nocciola, cioccolato, granella"
+        }
+      ]
+    }
+  ]
+};
+
+/* resolve icon: key in ICONS -> SVG; otherwise emoji/inline string as-is */
+function icon(v){ return (v && ICONS[v]) ? ICONS[v] : (v||''); }
+
+const $=s=>document.querySelector(s);
+const FLAGS={it:"🇮🇹",en:"🇬🇧",fr:"🇫🇷",es:"🇪🇸",de:"🇩🇪",ru:"🇷🇺",zh:"🇨🇳"};
+const CODES={it:"IT",en:"EN",fr:"FR",es:"ES",de:"DE",ru:"RU",zh:"中文"};
+let lang="it";
+const A=DATA.allergens, UI=DATA.ui;
+
+function t(obj){ if(obj==null) return ""; if(typeof obj==="string") return obj; return obj[lang]||obj.it||""; }
+
+/* ---- build language tabs + section chips once ---- */
+function buildControls(){
+  $("#langtabs").innerHTML = DATA.langs.map(l=>
+    `<div class="langtab" data-l="${l}"><span class="fl">${FLAGS[l]}</span>${CODES[l]}</div>`).join("");
+  $("#langtabs").querySelectorAll(".langtab").forEach(el=>{
+    el.addEventListener("click",()=>{ lang=el.dataset.l; setLang(); });
+  });
+  const chips = DATA.menu.map(s=>`<div class="chip" data-id="${s.id}"><span class="ce">${icon(s.icon)}</span><span class="cl">${t(s.cat)}</span></div>`).join("")
+    + `<div class="chip" data-id="allergeni"><span class="ce">⚠️</span><span class="cl">${t(UI.allergens)}</span></div>`;
+  $("#chips").innerHTML = chips;
+  $("#chips").querySelectorAll(".chip").forEach(el=>{
+    el.addEventListener("click",()=>{
+      const target=document.getElementById("sec-"+el.dataset.id);
+      if(target) target.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+  });
+}
+
+function pill(key){const a=A[key]; return `<span class="pill"><span class="num">${a.n}</span>${a.e} ${t(a.nm)}</span>`;}
+
+/* ---- render menu + legend ---- */
+function render(){
+  let html="", i=0;
+  for(const s of DATA.menu){
+    html+=`<div class="sec-head" id="sec-${s.id}"><span class="ico">${icon(s.icon)}</span><h2>${t(s.cat)}</h2><span class="rule"></span></div>`;
+    if(s.note){
+      if(s.note.flavours){
+        html+=`<div class="flavbox"><div class="flavlabel">${t(s.note.flavLabel||s.note.label)}</div><div class="flavwrap">`
+          +s.note.flavours.map(f=>`<span class="flavtag">${f}</span>`).join("")+`</div></div>`;
+      }
+      if(s.note.text){
+        html+=`<div class="sec-note"><b>${t(s.note.label)}</b><br>${t(s.note.text)}</div>`;
+      }
+    }
+    for(const it of s.items){
+      const dsc=t(it.desc);
+      const pills = (it.all&&it.all.length)
+        ? `<span class="lbl">${t(UI.contains)}</span>`+it.all.map(pill).join("")
+        : `<span class="pill none">${t(UI.none)}</span>`;
+      const search=(it.name+" "+dsc+" "+t(s.cat)).toLowerCase();
+      html+=`<div class="glass card reveal item" data-s="${search}" style="animation-delay:${Math.min(i*22,300)}ms">
+        <div class="item-top"><div class="item-ico">${icon(it.icon||s.icon)}</div>
+          <div class="item-body">
+            <div class="item-name"><span class="nm">${it.name}</span><span class="price">${it.price}</span></div>
+            ${dsc?`<div class="item-desc">${dsc}</div>`:""}
+            <div class="pills">${pills}</div>
+          </div></div></div>`;
+      i++;
+    }
+  }
+  // legend
+  html+=`<div class="sec-head" id="sec-allergeni"><span class="ico">⚠️</span><h2>${t(UI.allergens)}</h2><span class="rule"></span></div>`;
+  html+=`<div class="sec-note">${t(UI.note)}</div>`;
+  html+=`<div class="glass card" style="padding:8px"><div class="legend-grid">`+
+    Object.values(A).map(a=>`<div class="all-chip"><span class="n">${a.n}</span><span class="e">${a.e}</span><span class="nm">${t(a.nm)}</span></div>`).join("")+
+    `</div></div>`;
+  $("#root").innerHTML=html;
+}
+
+function setLang(){
+  document.documentElement.lang=lang;
+  $("#tag").textContent=t(UI.tag);
+  $("#search").placeholder=t(UI.search);
+  $("#nores").textContent=t(UI.noresults);
+  $("#footer").innerHTML=t(UI.avail)+"<br>"+t(UI.frozen);
+  $("#langtabs").querySelectorAll(".langtab").forEach(el=>el.classList.toggle("active", el.dataset.l===lang));
+  $("#chips").querySelectorAll(".chip").forEach(el=>{
+    const s=DATA.menu.find(x=>x.id===el.dataset.id);
+    el.querySelector(".cl").textContent = s?t(s.cat):t(UI.allergens);
+  });
+  render();
+  applyFilter();
+  observe();
+}
+
+/* ---- search ---- */
+function applyFilter(){
+  const q=$("#search").value.trim().toLowerCase();
+  $("#clear").style.display=q?"block":"none";
+  let any=false;
+  document.querySelectorAll(".item").forEach(el=>{
+    const ok=!q || el.dataset.s.includes(q);
+    el.style.display=ok?"":"none"; if(ok) any=true;
+  });
+  // hide empty section headings while searching
+  document.querySelectorAll(".sec-head").forEach(h=>{
+    if(h.id==="sec-allergeni"){ h.style.display=q?"none":""; return; }
+    let n=h.nextElementSibling, vis=false;
+    while(n && !n.classList.contains("sec-head")){
+      if(n.classList.contains("item") && n.style.display!=="none") vis=true;
+      if(n.classList.contains("sec-note")) n.style.display=q?"none":"";
+      n=n.nextElementSibling;
+    }
+    h.style.display=(q && !vis)?"none":"";
+  });
+  // legend block hidden during search
+  const legend=document.querySelector(".legend-grid"); if(legend) legend.closest(".card").style.display=q?"none":"";
+  const note=document.querySelector("#sec-allergeni"); // its note is next .sec-note after it
+  $("#nores").style.display=(q && !any)?"block":"none";
+}
+$("#search").addEventListener("input",applyFilter);
+$("#clear").addEventListener("click",()=>{$("#search").value="";applyFilter();$("#search").focus();});
+
+/* ---- scrollspy for chips ---- */
+let io=null;
+function observe(){
+  if(io) io.disconnect();
+  const h=$(".controls").offsetHeight;
+  document.documentElement.style.setProperty("--header-h",(h+14)+"px");
+  io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const id=e.target.id.replace("sec-","");
+        $("#chips").querySelectorAll(".chip").forEach(c=>c.classList.toggle("active",c.dataset.id===id));
+        const ac=$("#chips").querySelector(".chip.active");
+        if(ac) ac.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});
+      }
+    });
+  },{rootMargin:`-${h+20}px 0px -70% 0px`, threshold:0});
+  document.querySelectorAll(".sec-head").forEach(s=>io.observe(s));
+}
+
+buildControls();
+setLang();
+window.addEventListener("resize",()=>observe());
+</script>
+</body>
+</html>
